@@ -16,16 +16,16 @@ public class GitHubProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "profileId")
+    @Column(name = "profile_id")
     private int profileId;
 
-    @Column(name = "githubToken")
+    @Column(name = "github_token")
     private String githubToken;
 
-    @Column(name = "githubUsername")
+    @Column(name = "github_username")
     private String githubUsername;
 
-    @Column(name = "profileUrl")
+    @Column(name = "profile_url")
     private String profileUrl;
 
     @OneToOne(mappedBy = "github")

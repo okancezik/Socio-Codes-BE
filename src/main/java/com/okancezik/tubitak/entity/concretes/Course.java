@@ -20,17 +20,17 @@ public class Course {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "participantCount")
+    @Column(name = "participant_count")
     private int participantCount;
 
     @Column(name = "duration")
     private int duration;
 
-    @Column(name = "imageUrl")
+    @Column(name = "image_url")
     private String imageUrl;
 
     @ManyToOne
-    @JoinColumn(name = "branchId", referencedColumnName = "id")
+    @JoinColumn(name = "branch_id", referencedColumnName = "id")
     private SoftwareBranch branch;
 
 }

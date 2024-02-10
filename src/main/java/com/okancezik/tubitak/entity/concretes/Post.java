@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 @Data
 @Entity
@@ -22,27 +23,27 @@ public class Post {
     @Column(name = "content")
     private String postContent;
 
-    @Column(name = "repositoryUrl")
+    @Column(name = "repository_url")
     private String repositoryUrl;
 
-    @Column(name = "createdDate")
-    private Date createdDate;
+    @Column(name = "created_date")
+    private LocalDateTime loadDate = LocalDateTime.now();
 
-    @Column(name = "imageUrl")
+    @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "likeCount")
+    @Column(name = "like_count")
     private int likeCount;
 
-    @Column(name = "commentCount")
+    @Column(name = "comment_count")
     private int commentCount;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "branchId", referencedColumnName = "id")
+    @JoinColumn(name = "branch_id", referencedColumnName = "id")
     private SoftwareBranch branch;
 
 }

@@ -18,44 +18,44 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "userFullName")
+    @Column(name = "user_full_name")
     private String userFullName;
 
-    @Column(name = "userEmail")
+    @Column(name = "user_email")
     private String userEmail;
 
-    @Column(name = "userTitle")
+    @Column(name = "user_title")
     private String userTitle;
 
-    @Column(name = "phoneNumber")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "userBio")
+    @Column(name = "user_bio")
     private String userBio;
 
-    @Column(name = "backgroundUrl")
+    @Column(name = "background_url")
     private String backgroundUrl;
 
-    @Column(name = "userAvatarUrl")
+    @Column(name = "user_avatar_url")
     private String userAvatarUrl;
 
-    @Column(name = "userRank")
+    @Column(name = "user_rank")
     private int userRank;
 
-    @Column(name = "userPoint")
+    @Column(name = "user_point")
     private int userPoint;
 
-    @Column(name = "userFollowerCount")
+    @Column(name = "user_follower_count")
     private int userFollowerCount;
 
-    @Column(name = "userFollowingCount")
+    @Column(name = "user_following_count")
     private int userFollowingCount;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "githubProfileId", referencedColumnName = "profileId")
+    @JoinColumn(name = "github_profile_id", referencedColumnName = "profile_id")
     private GitHubProfile github;
 
     @OneToMany(mappedBy = "user")
