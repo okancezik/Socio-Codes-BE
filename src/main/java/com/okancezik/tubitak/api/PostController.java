@@ -1,22 +1,30 @@
 package com.okancezik.tubitak.api;
 
-import com.okancezik.tubitak.dataAccess.PostRepository;
+import com.okancezik.tubitak.business.abstracts.PostService;
+import com.okancezik.tubitak.business.dtos.requests.PostUploadRequest;
+import com.okancezik.tubitak.business.dtos.responses.PostListModelResponse;
+import com.okancezik.tubitak.core.results.DataResult;
+import com.okancezik.tubitak.core.results.Result;
 import com.okancezik.tubitak.entity.concretes.Post;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/post")
 public class PostController {
 
-    private final PostRepository repository;
+    private final PostService service;
 
     @PostMapping
-    public void save(@RequestBody Post post){
-        repository.save(post);
+    public Result save(@RequestBody PostUploadRequest post){
+        return service.save(post);
+    }
+
+    @GetMapping
+    public DataResult<List<PostListModelResponse>> getAll() {
+        return service.getAll();
     }
 }

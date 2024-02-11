@@ -1,5 +1,6 @@
 package com.okancezik.tubitak.entity.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class Post {
     private int id;
 
     @Column(name = "content")
-    private String postContent;
+    private String content;
 
     @Column(name = "repository_url")
     private String repositoryUrl;
@@ -38,6 +39,7 @@ public class Post {
     @Column(name = "comment_count")
     private int commentCount;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
