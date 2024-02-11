@@ -1,7 +1,7 @@
 package com.okancezik.tubitak.business.abstracts;
 
-import com.okancezik.tubitak.entity.concretes.User;
+import com.okancezik.tubitak.business.dtos.requests.UserRegisterRequest;
 
 public interface UserService {
-    void save(User user);
+    void save(UserRegisterRequest user);
 }

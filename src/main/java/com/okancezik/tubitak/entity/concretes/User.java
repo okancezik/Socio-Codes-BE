@@ -18,41 +18,41 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
-    private int userId;
+    @Column(name = "id")
+    private int id;
 
-    @Column(name = "user_full_name")
-    private String userFullName;
+    @Column(name = "full_name")
+    private String fullName;
 
-    @Column(name = "user_email")
-    private String userEmail;
+    @Column(name = "email")
+    private String email;
 
-    @Column(name = "user_title")
-    private String userTitle;
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "user_bio")
-    private String userBio;
+    @Column(name = "bio")
+    private String bio;
 
     @Column(name = "background_url")
     private String backgroundUrl;
 
-    @Column(name = "user_avatar_url")
-    private String userAvatarUrl;
+    @Column(name = "avatar_url")
+    private String avatarUrl;
 
-    @Column(name = "user_rank")
-    private int userRank;
+    @Column(name = "rank")
+    private int rank;
 
-    @Column(name = "user_point")
-    private int userPoint;
+    @Column(name = "point")
+    private int point;
 
-    @Column(name = "user_follower_count")
-    private int userFollowerCount;
+    @Column(name = "follower_count")
+    private int followerCount;
 
-    @Column(name = "user_following_count")
-    private int userFollowingCount;
+    @Column(name = "following_count")
+    private int followingCount;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "github_profile_id", referencedColumnName = "profile_id")
