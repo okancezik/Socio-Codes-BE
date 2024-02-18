@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,13 +34,27 @@ public class PostManager implements PostService {
     @Override
     public DataResult<List<PostListModelResponse>> getAll(PostPaginationFiltering pagination) {
         Page<Post> posts = repository.findAll(
-                PageRequest.of(pagination.getPageIndex(),pagination.getPageSize())
+                PageRequest.of(pagination.getPageIndex(), pagination.getPageSize())
         );
         List<PostListModelResponse> listedPost =
                 posts.stream().map(
-                        (post -> mapper.forResponse().map(post, PostListModelResponse.class)))
+                                (post -> mapper.forResponse().map(post, PostListModelResponse.class)))
                         .collect(Collectors.toList());
 
-        return new SuccessDataResult<>(listedPost,"Listed posts");
+        return new SuccessDataResult<>(listedPost, "Listed posts");
+    }
+
+    @Override
+    public DataResult<List<PostListModelResponse>> getAllByStudentId(PostPaginationFiltering pagination, int studentId) {
+        List<Post> posts = repository.findAllPostByUserId(PageRequest.of(pagination.getPageIndex(), pagination.getPageSize()), studentId);
+        if (posts.size() != 0) {
+            List<PostListModelResponse> postListModelResponses = posts.stream().
+                    map((post -> mapper.forResponse().map(post, PostListModelResponse.class)))
+                    .collect(Collectors.toList());
+            return new SuccessDataResult<>(postListModelResponses,"Listed Posts");
+        }else {
+            return new ErrorDataResult<>("Not found post");
+        }
+
     }
 }
