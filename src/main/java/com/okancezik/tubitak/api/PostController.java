@@ -3,6 +3,7 @@ package com.okancezik.tubitak.api;
 import com.okancezik.tubitak.business.abstracts.PostService;
 import com.okancezik.tubitak.business.dtos.requests.PostUploadRequest;
 import com.okancezik.tubitak.business.dtos.responses.PostListModelResponse;
+import com.okancezik.tubitak.core.filter_pagination.PostPaginationFiltering;
 import com.okancezik.tubitak.core.results.DataResult;
 import com.okancezik.tubitak.core.results.Result;
 import com.okancezik.tubitak.entity.concretes.Post;
@@ -23,8 +24,8 @@ public class PostController {
         return service.save(post);
     }
 
-    @GetMapping
-    public DataResult<List<PostListModelResponse>> getAll() {
-        return service.getAll();
+    @PostMapping("/list")
+    public DataResult<List<PostListModelResponse>> getAll(@RequestBody PostPaginationFiltering pagination) {
+        return service.getAll(pagination);
     }
 }

@@ -3,11 +3,14 @@ package com.okancezik.tubitak.business.conretes;
 import com.okancezik.tubitak.business.abstracts.PostService;
 import com.okancezik.tubitak.business.dtos.requests.PostUploadRequest;
 import com.okancezik.tubitak.business.dtos.responses.PostListModelResponse;
+import com.okancezik.tubitak.core.filter_pagination.PostPaginationFiltering;
 import com.okancezik.tubitak.core.results.*;
 import com.okancezik.tubitak.core.utils.mappers.ModelMapperService;
 import com.okancezik.tubitak.dataAccess.PostRepository;
 import com.okancezik.tubitak.entity.concretes.Post;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,10 +31,15 @@ public class PostManager implements PostService {
     }
 
     @Override
-    public DataResult<List<PostListModelResponse>> getAll() {
-        List<Post> posts = repository.findAll();
-        List<PostListModelResponse> listedPosts =
-                posts.stream().map(post -> mapper.forResponse().map(post, PostListModelResponse.class)).collect(Collectors.toList());
-        return new SuccessDataResult<>(listedPosts, "Listed posts");
+    public DataResult<List<PostListModelResponse>> getAll(PostPaginationFiltering pagination) {
+        Page<Post> posts = repository.findAll(
+                PageRequest.of(pagination.getPageIndex(),pagination.getPageSize())
+        );
+        List<PostListModelResponse> listedPost =
+                posts.stream().map(
+                        (post -> mapper.forResponse().map(post, PostListModelResponse.class)))
+                        .collect(Collectors.toList());
+
+        return new SuccessDataResult<>(listedPost,"Listed posts");
     }
 }
