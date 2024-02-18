@@ -10,4 +10,5 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
     List<Post> findAllPostByUserId(PageRequest pageRequest, int userId);
+    List<Post> findAllPostByBranchId(PageRequest pageRequest, int branchId);
 }

@@ -24,11 +24,17 @@ public class PostController {
     }
 
     @PostMapping("/list")
-    public DataResult<List<PostListModelResponse>> getAll(@RequestBody PostPaginationFiltering pagination) {
-        return service.getAll(pagination);
+    public DataResult<List<PostListModelResponse>> getAll(
+            @RequestBody PostPaginationFiltering pagination,
+            @RequestParam(required = false) Integer branchId
+    ){
+        if(branchId != null)
+            return service.getAllByBranchId(pagination,branchId);
+        else
+            return service.getAll(pagination);
     }
 
-    @PostMapping("/list/{studentId}")
+    @PostMapping("/list/student/{studentId}")
     public DataResult<List<PostListModelResponse>> getAll(
             @RequestBody PostPaginationFiltering pagination, @PathVariable int studentId
     )

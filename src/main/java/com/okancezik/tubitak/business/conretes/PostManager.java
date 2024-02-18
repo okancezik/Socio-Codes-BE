@@ -14,7 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,6 +34,19 @@ public class PostManager implements PostService {
     public DataResult<List<PostListModelResponse>> getAll(PostPaginationFiltering pagination) {
         Page<Post> posts = repository.findAll(
                 PageRequest.of(pagination.getPageIndex(), pagination.getPageSize())
+        );
+        List<PostListModelResponse> listedPost =
+                posts.stream().map(
+                                (post -> mapper.forResponse().map(post, PostListModelResponse.class)))
+                        .collect(Collectors.toList());
+
+        return new SuccessDataResult<>(listedPost, "Listed posts");
+    }
+
+    @Override
+    public DataResult<List<PostListModelResponse>> getAllByBranchId(PostPaginationFiltering pagination, int branchId) {
+        List<Post> posts = repository.findAllPostByBranchId(
+                PageRequest.of(pagination.getPageIndex(), pagination.getPageSize()),branchId
         );
         List<PostListModelResponse> listedPost =
                 posts.stream().map(
