@@ -14,7 +14,7 @@ public interface PostService {
 
    Result save(PostUploadRequest postUploadRequest);
 
-   DataResult<List<PostListModelResponse>> getAll(PostPaginationFiltering pagination);
+   DataResult<List<PostListModelResponse>> getAll(PostPaginationFiltering pagination, int userId);
 
    DataResult<List<PostListModelResponse>> getAllByBranchId(PostPaginationFiltering pagination, int branchId);
 

@@ -16,7 +16,6 @@ public class PostListModelResponse {
     private String content;
     private String repositoryUrl;
     private LocalDateTime loadDate = LocalDateTime.now();
-    private String imageUrl;
     private int commentCount;
     private int likeCount;
     private String repositoryDescription;

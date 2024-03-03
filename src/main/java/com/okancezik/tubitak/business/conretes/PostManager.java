@@ -6,6 +6,7 @@ import com.okancezik.tubitak.business.dtos.responses.PostListModelResponse;
 import com.okancezik.tubitak.core.filter_pagination.PostPaginationFiltering;
 import com.okancezik.tubitak.core.results.*;
 import com.okancezik.tubitak.core.utils.mappers.ModelMapperService;
+import com.okancezik.tubitak.dataAccess.LikeRepository;
 import com.okancezik.tubitak.dataAccess.PostRepository;
 import com.okancezik.tubitak.entity.concretes.Post;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 public class PostManager implements PostService {
 
     private final PostRepository repository;
+    private final LikeRepository likeRepository;
     private final ModelMapperService mapper;
 
     @Override
@@ -31,16 +34,43 @@ public class PostManager implements PostService {
     }
 
     @Override
-    public DataResult<List<PostListModelResponse>> getAll(PostPaginationFiltering pagination) {
+    public DataResult<List<PostListModelResponse>> getAll(PostPaginationFiltering pagination, int userId) {
         Page<Post> posts = repository.findAll(
                 PageRequest.of(pagination.getPageIndex(), pagination.getPageSize())
         );
+
+        List<PostListModelResponse> postData = new ArrayList<>();
+
+
+        for (Post post: posts) {
+            boolean liked=false;
+            liked = likeRepository.findByPost_IdAndUser_Id(post.getId(),userId).isPresent();
+            postData.add(new PostListModelResponse(
+                    post.getUser().getId(),
+                    post.getUser().getFullName(),
+                    post.getUser().getAvatarUrl(),
+                    post.getContent(),
+                    post.getRepositoryUrl(),
+                    post.getLoadDate(),
+                    post.getCommentCount(),
+                    post.getLikeCount(),
+                    post.getRepositoryDescription(),
+                    post.getRepositoryUpdatedDate(),
+                    post.getRepositoryForkCount(),
+                    post.getRepositoryStarCount(),
+                    "post.getBranch().getName()",
+                    liked
+            ));
+        }
+
+        /*
         List<PostListModelResponse> listedPost =
                 posts.stream().map(
                                 (post -> mapper.forResponse().map(post, PostListModelResponse.class)))
                         .collect(Collectors.toList());
+*/
 
-        return new SuccessDataResult<>(listedPost, "Listed posts");
+        return new SuccessDataResult<>(postData, "Listed posts");
     }
 
     @Override
