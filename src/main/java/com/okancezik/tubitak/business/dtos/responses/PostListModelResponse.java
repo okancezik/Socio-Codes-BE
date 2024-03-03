@@ -24,5 +24,6 @@ public class PostListModelResponse {
     private String repositoryForkCount;
     private String repositoryStarCount;
     private String branchName;
+    private boolean isLiked;
 
 }

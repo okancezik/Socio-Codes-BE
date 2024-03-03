@@ -21,4 +21,6 @@ public interface PostService {
    DataResult<List<PostListModelResponse>> getAllByStudentId(PostPaginationFiltering pagination, int studentId);
 
 
+
+
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -57,5 +58,8 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "branch_id")
     private SoftwareBranch branch;
+
+    @OneToMany(mappedBy = "post")
+    private List<Like> likes;
 
 }
