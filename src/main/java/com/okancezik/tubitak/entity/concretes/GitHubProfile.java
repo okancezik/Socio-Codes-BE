@@ -1,5 +1,6 @@
 package com.okancezik.tubitak.entity.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,7 +29,7 @@ public class GitHubProfile {
     @Column(name = "profile_url")
     private String profileUrl;
 
-    @OneToOne(mappedBy = "github")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne
     private User user;
-
 }

@@ -19,5 +19,10 @@ public class PostListModelResponse {
     private String imageUrl;
     private int commentCount;
     private int likeCount;
+    private String repositoryDescription;
+    private String repositoryUpdatedDate;
+    private String repositoryForkCount;
+    private String repositoryStarCount;
+    private String branchName;
 
 }

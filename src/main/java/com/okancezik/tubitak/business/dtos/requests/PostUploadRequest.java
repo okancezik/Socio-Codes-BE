@@ -21,10 +21,26 @@ public class PostUploadRequest {
 
     @NotNull
     @NotBlank
-    private String imageUrl;
+    private String repositoryUrl;
 
     @NotNull
     @NotBlank
-    private String repositoryUrl;
+    private String repositoryStarCount;
+
+    @NotNull
+    @NotBlank
+    private String repositoryForkCount;
+
+    @NotNull
+    @NotBlank
+    private String repositoryUpdatedDate;
+
+    @NotNull
+    @NotBlank
+    private String repositoryDescription;
+
+    @NotNull
+    @NotBlank
+    private int branchId;
 
 }

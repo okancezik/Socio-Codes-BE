@@ -36,14 +36,8 @@ public class User {
     @Column(name = "bio")
     private String bio;
 
-    @Column(name = "background_url")
-    private String backgroundUrl;
-
     @Column(name = "avatar_url")
     private String avatarUrl;
-
-    @Column(name = "rank")
-    private int rank;
 
     @Column(name = "point")
     private int point;

@@ -22,17 +22,8 @@ public class SoftwareBranch {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "rank")
-    private int rank;
-
-    @Column(name = "image_url")
-    private String imageUrl;
-
     @Column(name = "point")
     private int point;
-
-    @Column(name = "icon_url")
-    private String iconUrl;
 
     @OneToMany(mappedBy = "branch")
     private List<Post> posts;
