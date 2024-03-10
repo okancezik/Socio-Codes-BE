@@ -2,13 +2,9 @@ package com.okancezik.tubitak.api;
 
 import com.okancezik.tubitak.business.abstracts.CommentService;
 import com.okancezik.tubitak.business.dtos.requests.CommentUploadRequest;
-import com.okancezik.tubitak.core.results.DataResult;
-import com.okancezik.tubitak.entity.concretes.Comment;
+import com.okancezik.tubitak.core.results.Result;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,7 +14,12 @@ public class CommentController {
     private final CommentService service;
 
     @PostMapping
-    public DataResult<Comment> upload(@RequestBody CommentUploadRequest request){
+    public Result upload(@RequestBody CommentUploadRequest request){
         return service.upload(request);
+    }
+
+    @GetMapping
+    public Result getCommentsByPostId(@RequestParam int postId){
+        return service.getCommentsByPostId(postId);
     }
 }
