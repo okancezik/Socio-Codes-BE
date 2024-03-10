@@ -1,7 +1,6 @@
 package com.okancezik.tubitak.business.conretes;
 
 import com.okancezik.tubitak.business.abstracts.UserService;
-import com.okancezik.tubitak.business.dtos.requests.UserRegisterRequest;
 
 import com.okancezik.tubitak.business.dtos.requests.UserUpdateInfoRequest;
 import com.okancezik.tubitak.business.dtos.responses.UserDetailResponse;
@@ -24,13 +23,6 @@ public class UserManager implements UserService {
 
     private final UserRepository repository;
     private final ModelMapperService mapper;
-
-    @Override
-    public Result save(UserRegisterRequest user) {
-        User addUser= mapper.forRequest().map(user, User.class);
-        repository.save(addUser);
-        return new SuccessResult();
-    }
 
     @Override
     public DataResult<List<UserScoreModelResponse>> getUserScoreList() {
