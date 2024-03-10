@@ -68,6 +68,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Like> likes;
 
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
+
     @Enumerated(EnumType.STRING)
     private Role role;
     @Override
