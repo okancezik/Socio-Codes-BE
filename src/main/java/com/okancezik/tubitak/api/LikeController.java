@@ -3,6 +3,7 @@ package com.okancezik.tubitak.api;
 import com.okancezik.tubitak.business.abstracts.LikeService;
 import com.okancezik.tubitak.business.dtos.requests.LikePostRequest;
 import com.okancezik.tubitak.core.results.Result;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/like")
 @RequiredArgsConstructor
+@Tag(name = "Like")
 public class LikeController {
     private final LikeService service;
 

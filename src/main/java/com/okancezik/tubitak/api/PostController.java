@@ -6,6 +6,9 @@ import com.okancezik.tubitak.business.dtos.responses.PostListModelResponse;
 import com.okancezik.tubitak.core.filter_pagination.PostPaginationFiltering;
 import com.okancezik.tubitak.core.results.DataResult;
 import com.okancezik.tubitak.core.results.Result;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +17,25 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/post")
+@Tag(name = "Post")
 public class PostController {
 
     private final PostService service;
 
+    @Operation(
+            description = "Post upload endpoint",
+            summary = "Post upload",
+            responses = {
+                    @ApiResponse(
+                            description = "created",
+                            responseCode = "201"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized / Invalid Token",
+                            responseCode = "403"
+                    )
+            }
+    )
     @PostMapping
     public Result save(@RequestBody PostUploadRequest post){
         return service.save(post);
