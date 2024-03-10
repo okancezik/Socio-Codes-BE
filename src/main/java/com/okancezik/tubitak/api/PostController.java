@@ -31,7 +31,7 @@ public class PostController {
 
     ){
         if(branchId != null)
-            return service.getAllByBranchId(pagination,branchId);
+            return service.getAllByBranchId(pagination,branchId,userId);
         else
             return service.getAll(pagination,userId);
     }

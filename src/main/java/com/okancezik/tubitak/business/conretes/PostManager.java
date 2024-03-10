@@ -41,7 +41,6 @@ public class PostManager implements PostService {
 
         List<PostListModelResponse> postData = new ArrayList<>();
 
-
         for (Post post: posts) {
             boolean liked=false;
             liked = likeRepository.findByPost_IdAndUser_Id(post.getId(),userId).isPresent();
@@ -63,27 +62,38 @@ public class PostManager implements PostService {
             ));
         }
 
-        /*
-        List<PostListModelResponse> listedPost =
-                posts.stream().map(
-                                (post -> mapper.forResponse().map(post, PostListModelResponse.class)))
-                        .collect(Collectors.toList());
-*/
-
         return new SuccessDataResult<>(postData, "Listed posts");
     }
 
     @Override
-    public DataResult<List<PostListModelResponse>> getAllByBranchId(PostPaginationFiltering pagination, int branchId) {
+    public DataResult<List<PostListModelResponse>> getAllByBranchId(PostPaginationFiltering pagination, int branchId,int userId) {
         List<Post> posts = repository.findAllPostByBranchId(
-                PageRequest.of(pagination.getPageIndex(), pagination.getPageSize()),branchId
+                PageRequest.of(pagination.getPageIndex(), pagination.getPageSize()), branchId
         );
-        List<PostListModelResponse> listedPost =
-                posts.stream().map(
-                                (post -> mapper.forResponse().map(post, PostListModelResponse.class)))
-                        .collect(Collectors.toList());
 
-        return new SuccessDataResult<>(listedPost, "Listed posts");
+        List<PostListModelResponse> postData = new ArrayList<>();
+
+        for (Post post : posts) {
+            boolean liked = false;
+            liked = likeRepository.findByPost_IdAndUser_Id(post.getId(), userId).isPresent();
+            postData.add(new PostListModelResponse(
+                    post.getUser().getId(),
+                    post.getUser().getFullName(),
+                    post.getUser().getAvatarUrl(),
+                    post.getContent(),
+                    post.getRepositoryUrl(),
+                    post.getLoadDate(),
+                    post.getCommentCount(),
+                    post.getLikeCount(),
+                    post.getRepositoryDescription(),
+                    post.getRepositoryUpdatedDate(),
+                    post.getRepositoryForkCount(),
+                    post.getRepositoryStarCount(),
+                    "post.getBranch().getName()",
+                    liked
+            ));
+        }
+        return new SuccessDataResult<>(postData, "Listed posts");
     }
 
     @Override

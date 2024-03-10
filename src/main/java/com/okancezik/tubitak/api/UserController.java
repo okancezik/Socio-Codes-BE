@@ -37,6 +37,4 @@ public class UserController {
     public DataResult<UserDetailResponse> updateUser(@RequestBody UserUpdateInfoRequest user) {
         return service.updateUserInfo(user);
     }
-
-    //UserUpdateInfoRequest
 }

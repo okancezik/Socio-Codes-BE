@@ -27,6 +27,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "title")
     private String title;
 
@@ -57,5 +60,4 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Like> likes;
-
 }

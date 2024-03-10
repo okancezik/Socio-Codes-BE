@@ -16,7 +16,7 @@ public interface PostService {
 
    DataResult<List<PostListModelResponse>> getAll(PostPaginationFiltering pagination, int userId);
 
-   DataResult<List<PostListModelResponse>> getAllByBranchId(PostPaginationFiltering pagination, int branchId);
+   DataResult<List<PostListModelResponse>> getAllByBranchId(PostPaginationFiltering pagination, int branchId,int userId);
 
    DataResult<List<PostListModelResponse>> getAllByStudentId(PostPaginationFiltering pagination, int studentId);
 
