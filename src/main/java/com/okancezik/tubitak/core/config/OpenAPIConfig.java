@@ -24,8 +24,8 @@ import org.springframework.context.annotation.Configuration;
         ),
         servers = {
                 @Server(
-                        description = "Dev",
-                        url = "http://localhost:8090"
+                        description = "Dev-deploy",
+                        url = "http://ec2-3-75-227-9.eu-central-1.compute.amazonaws.com:8090"
                 )
         },
         security = {
