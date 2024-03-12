@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -108,5 +109,16 @@ public class PostManager implements PostService {
             return new ErrorDataResult<>("Not found post");
         }
 
+    }
+
+    @Override
+    public Result delete(int postId) {
+       Optional<Post> post = repository.findById(postId);
+       if(post.isPresent()){
+           repository.deleteById(postId);
+           return new SuccessResult("Deleted post");
+       }else{
+           return new ErrorResult("Not found post");
+       }
     }
 }

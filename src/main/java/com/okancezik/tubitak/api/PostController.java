@@ -6,6 +6,7 @@ import com.okancezik.tubitak.business.dtos.responses.PostListModelResponse;
 import com.okancezik.tubitak.core.filter_pagination.PostPaginationFiltering;
 import com.okancezik.tubitak.core.results.DataResult;
 import com.okancezik.tubitak.core.results.Result;
+import com.okancezik.tubitak.core.results.SuccessResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -60,5 +61,10 @@ public class PostController {
     )
     {
         return service.getAllByStudentId(pagination, studentId);
+    }
+
+    @DeleteMapping("/{postId}")
+    public Result delete(@PathVariable int postId){
+        return service.delete(postId);
     }
 }
