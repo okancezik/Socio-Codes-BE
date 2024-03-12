@@ -9,6 +9,8 @@ import com.okancezik.tubitak.core.results.DataResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,8 +54,9 @@ public class AuthController {
     )
     @PostMapping("/authenticate")
     public DataResult<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
+            @RequestBody AuthenticationRequest request,
+            HttpServletResponse response
     ){
-        return authenticationService.authenticate(request);
+        return authenticationService.authenticate(request,response);
     }
 }

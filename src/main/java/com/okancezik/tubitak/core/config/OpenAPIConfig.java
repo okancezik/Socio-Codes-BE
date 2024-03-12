@@ -19,13 +19,17 @@ import org.springframework.context.annotation.Configuration;
                         url = "https://www.linkedin.com/in/okancezik/"
                 ),
                 description = "OpenApi Doc",
-                title = "SocioCodes OpenApi Documentations",
+                title = "SocioCodes API",
                 version = "1.0"
         ),
         servers = {
                 @Server(
                         description = "Dev-deploy",
                         url = "http://ec2-3-75-227-9.eu-central-1.compute.amazonaws.com:8090"
+                ),
+                @Server(
+                        description = "Dev-locale",
+                        url = "http://localhost:8090"
                 )
         },
         security = {

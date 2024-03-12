@@ -11,7 +11,10 @@ import com.okancezik.tubitak.dataAccess.UserRepository;
 import com.okancezik.tubitak.entity.concretes.User;
 import com.okancezik.tubitak.entity.enums.Role;
 import com.okancezik.tubitak.security.JwtService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,7 +45,10 @@ public class AuthManager implements AuthenticationService {
     }
 
     @Override
-    public DataResult<AuthenticationResponse> authenticate(AuthenticationRequest request) {
+    public DataResult<AuthenticationResponse> authenticate(
+            AuthenticationRequest request,
+            HttpServletResponse response
+    ) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -52,6 +58,14 @@ public class AuthManager implements AuthenticationService {
 
         var user = repository.findByEmail(request.getEmail()).orElseThrow();
         String jwt = jwtService.generateToken(user);
+        ResponseCookie cookie =
+                ResponseCookie.from("accessToken",jwt)
+                        .httpOnly(true)
+                        .secure(false)
+                        .path("/")
+                        .maxAge(1800)
+                        .build();
+        response.addHeader(HttpHeaders.SET_COOKIE,cookie.toString());
         var data =  AuthenticationResponse
                 .builder()
                 .token(jwt)
