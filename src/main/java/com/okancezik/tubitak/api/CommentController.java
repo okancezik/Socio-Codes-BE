@@ -24,4 +24,10 @@ public class CommentController {
     public Result getCommentsByPostId(@RequestParam int postId){
         return service.getCommentsByPostId(postId);
     }
+
+    @DeleteMapping("/{commentId}")
+    public Result delete(@PathVariable int commentId){
+        return service.delete(commentId);
+    }
+
 }

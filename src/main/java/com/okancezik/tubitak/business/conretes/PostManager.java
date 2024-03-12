@@ -47,6 +47,7 @@ public class PostManager implements PostService {
             liked = likeRepository.findByPost_IdAndUser_Id(post.getId(),userId).isPresent();
             postData.add(new PostListModelResponse(
                     post.getUser().getId(),
+                    post.getId(),
                     post.getUser().getFullName(),
                     post.getUser().getAvatarUrl(),
                     post.getContent(),
@@ -79,6 +80,7 @@ public class PostManager implements PostService {
             liked = likeRepository.findByPost_IdAndUser_Id(post.getId(), userId).isPresent();
             postData.add(new PostListModelResponse(
                     post.getUser().getId(),
+                    post.getId(),
                     post.getUser().getFullName(),
                     post.getUser().getAvatarUrl(),
                     post.getContent(),

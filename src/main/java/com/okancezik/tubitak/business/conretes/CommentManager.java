@@ -3,10 +3,7 @@ package com.okancezik.tubitak.business.conretes;
 import com.okancezik.tubitak.business.abstracts.CommentService;
 import com.okancezik.tubitak.business.dtos.requests.CommentUploadRequest;
 import com.okancezik.tubitak.business.dtos.responses.CommentListModelResponse;
-import com.okancezik.tubitak.core.results.DataResult;
-import com.okancezik.tubitak.core.results.ErrorDataResult;
-import com.okancezik.tubitak.core.results.Result;
-import com.okancezik.tubitak.core.results.SuccessDataResult;
+import com.okancezik.tubitak.core.results.*;
 import com.okancezik.tubitak.core.utils.mappers.ModelMapperService;
 import com.okancezik.tubitak.dataAccess.CommentRepository;
 import com.okancezik.tubitak.entity.concretes.Comment;
@@ -14,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,5 +42,16 @@ public class CommentManager implements CommentService {
             return new ErrorDataResult<>("Not found comment");
         }
 
+    }
+
+    @Override
+    public Result delete(int commentId) {
+        Optional<Comment> comment =  repository.findById(commentId);
+        if(comment.isPresent()){
+            repository.deleteById(commentId);
+            return new SuccessResult("Deleted comment");
+        }else{
+            return new SuccessResult("Not found comment");
+        }
     }
 }

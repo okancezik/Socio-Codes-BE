@@ -11,4 +11,6 @@ public interface CommentService {
     Result upload(CommentUploadRequest request);
 
     DataResult<List<CommentListModelResponse>> getCommentsByPostId(int postId);
+
+    Result delete(int commentId);
 }

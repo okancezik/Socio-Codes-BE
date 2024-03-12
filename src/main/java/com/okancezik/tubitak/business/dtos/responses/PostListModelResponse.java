@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PostListModelResponse {
     private int userId;
+    private int postId;
     private String userFullName;
     private String userAvatarUrl;
     private String content;
