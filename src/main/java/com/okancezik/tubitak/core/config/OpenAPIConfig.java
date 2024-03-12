@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Configuration;
         servers = {
                 @Server(
                         description = "Dev-deploy",
-                        url = "http://ec2-3-75-227-9.eu-central-1.compute.amazonaws.com:8090"
+                        url = "http://ec2-35-159-0-56.eu-central-1.compute.amazonaws.com:8090"
                 ),
                 @Server(
                         description = "Dev-locale",
