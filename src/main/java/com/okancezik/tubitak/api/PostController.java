@@ -42,6 +42,20 @@ public class PostController {
         return service.save(post);
     }
 
+    @Operation(
+            description = "Post list endpoint",
+            summary = "Post list",
+            responses = {
+                    @ApiResponse(
+                            description = "Listed",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized / Invalid Token",
+                            responseCode = "403"
+                    )
+            }
+    )
     @PostMapping("/list")
     public DataResult<List<PostListModelResponse>> getAll(
             @RequestBody PostPaginationFiltering pagination,
@@ -55,6 +69,20 @@ public class PostController {
             return service.getAll(pagination,userId);
     }
 
+    @Operation(
+            description = "User's post list endpoint",
+            summary = "User's post list",
+            responses = {
+                    @ApiResponse(
+                            description = "Listed",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized / Invalid Token",
+                            responseCode = "403"
+                    )
+            }
+    )
     @PostMapping("/list/student/{studentId}")
     public DataResult<List<PostListModelResponse>> getAll(
             @RequestBody PostPaginationFiltering pagination, @PathVariable int studentId
@@ -63,6 +91,20 @@ public class PostController {
         return service.getAllByStudentId(pagination, studentId);
     }
 
+    @Operation(
+            description = "Post delete endpoint",
+            summary = "Post delete",
+            responses = {
+                    @ApiResponse(
+                            description = "Deleted",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized / Invalid Token",
+                            responseCode = "403"
+                    )
+            }
+    )
     @DeleteMapping("/{postId}")
     public Result delete(@PathVariable int postId){
         return service.delete(postId);

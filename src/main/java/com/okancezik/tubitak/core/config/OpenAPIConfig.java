@@ -43,7 +43,7 @@ import org.springframework.context.annotation.Configuration;
         scheme = "bearer",
         type = SecuritySchemeType.HTTP,
         bearerFormat = "JWT",
-        in = SecuritySchemeIn.HEADER
+        in = SecuritySchemeIn.COOKIE
 )
 public class OpenAPIConfig {
 
